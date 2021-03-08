@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from "react";
+import React, { useReducer, useContext, useEffect } from "react";
 import { ping, pong } from "./api.js";
 /* import openSocket from "socket.io-client"; */
 import "./style.css";
@@ -11,10 +11,12 @@ export function App() {
 		registroAzioni: new Array(),
 	});
 
-	pong((type) => {
-		console.log("pong arrivato");
-		dispatch({ type: type });
-	});
+	useEffect(() => {
+		pong((type) => {
+			console.log("pong arrivato");
+			dispatch({ type: type });
+		});
+	}, []);
 
 	/* 	socket.on("connect", () => {
 		console.log("connessione...");
